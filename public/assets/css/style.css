@@ -1,0 +1,126 @@
+
+body{
+    background-image: url("/assets/images/kal-loftus-763782-unsplash.jpg");
+    background-size: auto 100%;
+}
+
+.card-body{
+    /* background-color: black; */
+}
+
+.nav{
+    background-color: rgba(54, 54, 54, 0.651)
+}
+
+.navCon{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 576px) {
+    #listen2me{
+    max-width: 100%;
+    }
+}
+
+.navRow{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+a.nav-link{
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+a.nav-link#beSmall{
+    text-align: center;
+    font-size: 1rem;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+h1{
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+    background-color: rgba(138, 138, 138, 0.801);
+    margin-bottom: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+h2{
+    text-align: center;
+    background-color: rgba(138, 138, 138, 0.801);
+    padding-left: 0px;
+    padding-right: 0px;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.headCol{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.conCol{
+    background-color: rgba(216, 216, 216, 0.459);
+}
+
+.conCol1{
+    padding-left: 0px;
+    margin-bottom: 1.5rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+.conCol2{
+    padding-left: 0px;
+    margin-bottom: 1.5rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.card:first-child{
+    border-top-left-radius: 1rem;
+}
+
+.card:first-child .card-body{
+    border-top-left-radius: 1rem;
+}
+
+.card:last-child{
+    border-bottom-left-radius: 1rem;
+}
+
+.card:last-child .card-body{
+    border-bottom-left-radius: 1rem;
+}
+
+h5{
+    width: 100%;
+    font-weight: bold;
+    font-style: italic 
+}
+
+button.change-title-pen{
+    padding: 0;
+}
+
+i.tiny.material-icons{
+    font-size: 14px;
+}
+
+button.btn-primary {
+    color: #fff;
+    background-color: #4d4d4d;
+    border-color: #4d4d4d;
+    position: absolute;
+    right: 1.25rem;
+}
