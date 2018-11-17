@@ -1,0 +1,2 @@
+
+CREATE DATABASE sequelize_theories_db;

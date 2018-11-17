@@ -1,0 +1,139 @@
+<ul class="nav">
+    <div class="container navCon" id="listen2me">
+        <div class="row navRow">
+            <div class="col-8">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">"Fan"ter</a>
+                </li>
+            </div>
+            <div class="col-2 align-self-center">
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="/api/" id="beSmall">API Data</a>
+                </li>
+            </div>
+            <div class="col-2 align-self-center">
+
+                <li class="nav-item align-self-center">
+                    <a class="nav-link signOut" href="#" id="beSmall">Sign Out</a>
+                </li>
+            </div>
+        </div>
+    </div>
+    {{!-- <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+    </li> --}}
+</ul>
+<div class="modal" tabindex="-1" role="dialog" id="welcomeModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Welcome to FANter</h5>
+            </div>
+            <div class="modal-body" id="targetWelcomeback">
+                {{!-- <p>Good to see you </p> --}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeWelcomeModal" data-dismiss="modal">Continue to site</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Theory</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="create-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Movie/TV Name: </label>
+                        <input type="text" class="form-control new-title" id="name" value="testing" placeholder="Stranger Things">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Edit Post: </label>
+                        <textarea type="text" class="form-control new-post" id="name" placeholder="Stranger Things"
+                            rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary change-title">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 headCol">
+            <h1>Welcome to "FAN"ter</h1>
+            <h2>The best place to talk about your favorite movie/TV theories and ideas!</h2>
+        </div>
+    </div>
+    <div class="row contentRow">
+        <div class="col-8 conCol conCol1">
+            {{#each theories as |child|}}
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title justify-content-between" id={{#> childEntry}} {{child.id}} {{/childEntry}}>
+                        {{#> childEntry}}
+                        {{child.media_name}}
+                        {{/childEntry}}
+                        <button type="button" class="btn btn-primary change-title-pen" data-toggle="modal" data-target="#exampleModal"
+                            id={{#> childEntry}} {{child.id}} {{/childEntry}}>
+                            <i class="tiny material-icons" id={{#> childEntry}} {{child.id}} {{/childEntry}}>edit</i>
+                        </button>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Created by:
+                        {{#> childEntry}}
+                        {{child.creator}}
+                        {{/childEntry}}
+                        <br>
+                        {{#> childEntry}}
+                        {{child.date_posted}}
+                        {{/childEntry}}
+                    </h6>
+                    <p class="card-text" id={{#> childEntry}} {{child.id}} {{/childEntry}}>
+                        {{#> childEntry}}
+                        {{child.theory}}
+                        {{/childEntry}}
+                    </p>
+                    <p>Likes:
+                        {{#> childEntry}}
+                        {{child.likes}}
+                        {{/childEntry}}
+                    </p>
+                    <a href="#" class="card-link">Comment</a>
+                    <a href="#" class="card-link delete" id={{#> childEntry}} {{child.id}} {{/childEntry}}>Delete</a>
+                    <a href="#" class="card-link like" id={{#> childEntry}} {{child.id}} {{/childEntry}} type={{#> childEntry}}
+                        {{child.likes}} {{/childEntry}}>Like</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="col-4 conCol conCol2">
+            {{!-- for creating new theory --}}
+            <h3>Add a Theory!</h3>
+            <form class="create-form">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Movie/TV Name: </label>
+                    <input type="text" class="form-control" id="name1" placeholder="Stranger Things">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Username: </label>
+                    <input type="text" class="form-control" id="user" placeholder="TheZuck">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Theory: </label>
+                    <textarea class="form-control" id="theoBody" rows="4" placeholder="Put your best, misplaced spoiler here!"></textarea>
+                </div>
+                <button type="submit">Add Theory</button>
+            </form>
+        </div>
+    </div>
+</div>

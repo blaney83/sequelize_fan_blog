@@ -73,6 +73,45 @@ $(function () {
         });
     });
 
+    $(document).on("click", "#loginbtn", function(event){
+        //send a post request to author DB and set a local storage key for the session
+        let username = $("#username").val().trim();
+        let password = $("#password").val().trim();
+        let userData = {
+            creator: username,
+            password: password
+        };
+
+        localStorage.setItem("username", username);
+        $.ajax("/api/users", {
+            type: "POST",
+            data: userData
+        }).then(function(resp){
+            console.log(resp);
+        })
+    })
+
+    $(document).ready(function(event){
+        $("#welcomeModal").css("display", "block")
+        $("#targetWelcomeback").html("<p>Good to see you " + localStorage.getItem("username") + "! </p>")
+        console.log($("#targetWelcomeback").text());
+        $("#closeWelcomeModal").on("click", function(event){
+            console.log("listening")
+            $("#welcomeModal").css("display", "none")
+        });
+        $(".signOut").on("click", function(event){
+            localStorage.clear();
+            $.ajax("/", {
+                type: "GET",
+                data: "none"
+            }).then((resp)=>{
+                $("body").html(resp)
+                console.log("Log-out successful");
+                
+            })
+        })
+    })
+
     function editPost(blerb) {
         let messy = $(blerb).html();
         messy.split();

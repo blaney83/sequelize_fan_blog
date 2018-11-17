@@ -1,47 +1,65 @@
 
-var sequelizeConnection = require("../config/connection.js")
+module.exports = function (sequelize, DataTypes) {
+    //lowercase sequelize is the connection 
+    let theory_table = sequelize.define("theory_table", {
+        media_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+                //    add unique value function
+            }
+        },
+        theory: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            len: [1, 160]
+        },
+        likes: {
+            type: DataTypes.STRING,
+            defaultValue: 0,
+            validate: {
+                isNumeric: true
+            }
+        },
+        date_posted: {
 
-var theoryModel = sequelizeConnection.define("theory", {
-    id: Sequelize.INT,
-    media_name: Sequelize.STRING,
-    creator: Sequelize.STRING,
-    date_posted: Sequelize.DATE,
-    theory: Sequelize.STRING,
-    likes: Sequelize.INT,
-})
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW(),
+        },
+        author_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isNumeric: true
+            }
+        }
+        // createdAt: DataTypes.DATE,
+        // updatedAt: DataTypes.DATE,
+        // timestamps: false,
+    })
 
-theoryModel.sync();
+    theory_table.associate = function (dbModelsBurrito) {
+        theory_table.belongsTo(dbModelsBurrito.author_table, {
+            foreignKey: {
+                allowNull: false
+            }
+        })
+    }
 
-module.exports = theoryModel;
+    theory_table.associate = function(dbModelsBurrito) {
+        theory_table.hasMany(dbModelsBurrito.comment_table, {
+            onDelete: {
+                allowNull: "cascade"
+            }
+        })
+    }
 
-// const orm = require("../config/orm.js");
+    return theory_table;
+}
 
-// let theories = {
-//     all: function (cb) {
-//         orm.all("theories", (res) => {
-//             cb(res);
-//         })
-//     },
-//     create: function (cols, vals, cb) {
-//         orm.create("theories", cols, vals, (res) => {
-//             cb(res);
-//         })
-//     },
-//     update: function (objColVals, condition, cb) {
-//         orm.update("theories", objColVals, condition, (res) => {
-//             cb(res);
-//         })
-//     },
-//     delete: function (condition, cb) {
-//         orm.delete("theories", condition, (res) => {
-//             cb(res);
-//         })
-//     },
-//     readName: function (condition, cb) {
-//         orm.readName("theories", condition, (res) => {
-//             cb(res);
-//         })
-//     }
-// }
 
-// module.exports = theories;
+
+
+
