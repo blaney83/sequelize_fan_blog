@@ -1,5 +1,5 @@
 # "FAN"ter: Fan Theory Website
-Tech: Node.js, Heroku, Express, Sequelize, SQL.
+Tech: Node.js, Heroku, Express, Sequelize, SQL
 
 ## SITE LINK
 
