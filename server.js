@@ -23,7 +23,9 @@ app.set("view engine", "handlebars");
 
 // app.use(routes);
 require("./routes/html-routes.js")(app);
-// require("./routes/author-routes.js")(app);
+require("./routes/author-routes.js")(app);
+require("./routes/theory-routes.js")(app);
+
 
 
 

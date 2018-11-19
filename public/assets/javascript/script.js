@@ -73,7 +73,7 @@ $(function () {
         });
     });
 
-    $(document).on("click", "#loginbtn", function(event){
+    $(document).on("click", "#loginbtn", function (event) {
         //send a post request to author DB and set a local storage key for the session
         let username = $("#username").val().trim();
         let password = $("#password").val().trim();
@@ -86,28 +86,82 @@ $(function () {
         $.ajax("/api/users", {
             type: "POST",
             data: userData
-        }).then(function(resp){
-            console.log(resp);
-        })
+        }).then(function (data) {
+            // renderPosts(data)
+            console.log("logged in" + data.id)
+            console.log("logged in" + JSON.stringify(data))
+            localStorage.setItem("userId", data.id);
+
+        });
+        renderPosts()
     })
 
-    $(document).ready(function(event){
-        $("#welcomeModal").css("display", "block")
-        $("#targetWelcomeback").html("<p>Good to see you " + localStorage.getItem("username") + "! </p>")
-        console.log($("#targetWelcomeback").text());
-        $("#closeWelcomeModal").on("click", function(event){
+    function renderPosts(resp) {
+        rowsToAdd = [];
+        $.post("/main",
+            function (data) {
+                console.log("renderPosts fired")
+                console.log("theories_table" + data)
+                data.forEach(function (val) {
+                    console.log(val)
+                    rowsToAdd.push(createAuthorRow(val));
+                })
+                // renderAuthorList(rowsToAdd);
+                // nameInput.val("");
+            }).then(function () {
+                console.log(rowsToAdd)
+                columnContents = rowsToAdd.join("")
+                console.log(rowsToAdd)
+                console.log(columnContents)
+                // $("#insertCardsHere").text(cardHtml)
+                $("#insertCardsHere").html(columnContents)
+                console.log($("#insertCardsHere"))
+
+
+                renderPostCards(columnContents)
+            });
+        // postArray = [];
+        console.log("users post is firing")
+    };
+
+    function createAuthorRow(postObj) {
+        console.log(postObj)
+        let postTitle = postObj.media_name;
+        let postBody = postObj.theory;
+        let postLikes = postObj.likes;
+        let postDate = postObj.date_posted;
+        let postId = postObj.id;
+        let cardHtml = '<div class="card" style="width: 100%;"><div class="card-body"><h5 class="card-title justify-content-between" id=' + postId + '>' + postTitle + '<button type="button" class="btn btn-primary change-title-pen" data-toggle="modal" data-target="#exampleModal" id=' + postId + '><i class="tiny material-icons" id=' + postId + '>edit</i></button></h5><h6 class="card-subtitle mb-2 text-muted">Created by: still working on this part<br>' + postDate + '</h6><p class="card-text" id=' + postId + '>' + postBody + '</p><p>Likes: ' + postLikes + '</p><a href="#" class="card-link">Comment</a><a href="#" class="card-link delete" id=' + postId + '>Delete</a><a href="#" class="card-link like" id=' + postId + ' type=' + postLikes + '>Like</a></div></div>';
+        console.log(cardHtml)
+        return (cardHtml)
+    };
+
+    function renderPostCards(html) {
+        function waitRender(html) {
+            $("#insertCardsHere").html(html)
             console.log("listening")
+        }
+        setTimeout(waitRender, 2000)
+    }
+
+    $(document).ready(function (event) {
+        let uName = localStorage.getItem("username");
+        $("#welcomeModal").css("display", "block");
+        $("#appendUserHere").append("<p>Author: " + uName + "</p>")
+        $("#targetWelcomeback").html("<p>Good to see you " + uName + "! </p>")
+        $("#closeWelcomeModal").on("click", function (event) {
             $("#welcomeModal").css("display", "none")
+
         });
-        $(".signOut").on("click", function(event){
+
+        $(".signOut").on("click", function (event) {
             localStorage.clear();
             $.ajax("/", {
                 type: "GET",
                 data: "none"
-            }).then((resp)=>{
+            }).then((resp) => {
                 $("body").html(resp)
                 console.log("Log-out successful");
-                
             })
         })
     })

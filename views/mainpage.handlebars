@@ -76,45 +76,8 @@
         </div>
     </div>
     <div class="row contentRow">
-        <div class="col-8 conCol conCol1">
-            {{#each theories as |child|}}
-            <div class="card" style="width: 100%;">
-                <div class="card-body">
-                    <h5 class="card-title justify-content-between" id={{#> childEntry}} {{child.id}} {{/childEntry}}>
-                        {{#> childEntry}}
-                        {{child.media_name}}
-                        {{/childEntry}}
-                        <button type="button" class="btn btn-primary change-title-pen" data-toggle="modal" data-target="#exampleModal"
-                            id={{#> childEntry}} {{child.id}} {{/childEntry}}>
-                            <i class="tiny material-icons" id={{#> childEntry}} {{child.id}} {{/childEntry}}>edit</i>
-                        </button>
-                    </h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Created by:
-                        {{#> childEntry}}
-                        {{child.creator}}
-                        {{/childEntry}}
-                        <br>
-                        {{#> childEntry}}
-                        {{child.date_posted}}
-                        {{/childEntry}}
-                    </h6>
-                    <p class="card-text" id={{#> childEntry}} {{child.id}} {{/childEntry}}>
-                        {{#> childEntry}}
-                        {{child.theory}}
-                        {{/childEntry}}
-                    </p>
-                    <p>Likes:
-                        {{#> childEntry}}
-                        {{child.likes}}
-                        {{/childEntry}}
-                    </p>
-                    <a href="#" class="card-link">Comment</a>
-                    <a href="#" class="card-link delete" id={{#> childEntry}} {{child.id}} {{/childEntry}}>Delete</a>
-                    <a href="#" class="card-link like" id={{#> childEntry}} {{child.id}} {{/childEntry}} type={{#> childEntry}}
-                        {{child.likes}} {{/childEntry}}>Like</a>
-                </div>
-            </div>
-            {{/each}}
+        <div class="col-8 conCol conCol1" id="insertCardsHere">
+            hello
         </div>
         <div class="col-4 conCol conCol2">
             {{!-- for creating new theory --}}
@@ -124,9 +87,7 @@
                     <label for="exampleFormControlInput1">Movie/TV Name: </label>
                     <input type="text" class="form-control" id="name1" placeholder="Stranger Things">
                 </div>
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Username: </label>
-                    <input type="text" class="form-control" id="user" placeholder="TheZuck">
+                <div class="form-group" id="appendUserHere">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Theory: </label>

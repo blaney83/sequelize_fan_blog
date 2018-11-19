@@ -1,7 +1,7 @@
 
 module.exports = function (sequelize, DataTypes) {
     //lowercase sequelize is the connection 
-    let theory_table = sequelize.define("theory_table", {
+    let Theory = sequelize.define("theory_table", {
         media_name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -40,23 +40,23 @@ module.exports = function (sequelize, DataTypes) {
         // timestamps: false,
     })
 
-    theory_table.associate = function (dbModelsBurrito) {
-        theory_table.belongsTo(dbModelsBurrito.author_table, {
+    Theory.associate = function (dbModelsBurrito) {
+        Theory.belongsTo(dbModelsBurrito.author_table, {
             foreignKey: {
                 allowNull: false
             }
         })
     }
 
-    theory_table.associate = function(dbModelsBurrito) {
-        theory_table.hasMany(dbModelsBurrito.comment_table, {
-            onDelete: {
-                allowNull: "cascade"
-            }
-        })
-    }
+    // theory_table.associate = function(dbModelsBurrito) {
+    //     theory_table.hasMany(dbModelsBurrito.comment_table, {
+    //         onDelete: {
+    //             allowNull: "cascade"
+    //         }
+    //     })
+    // }
 
-    return theory_table;
+    return Theory;
 }
 
 
